@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #1a1a1a 0%, #1a1a1a 50%, #3a3a3a 100%);
+            color: #fff;
+            /* White text color */
+            margin: 0;
+            padding: 0;
+            animation: animateBackground 20s infinite linear;
+        }
+
+        @keyframes animateBackground {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .header-options {
+            display: flex;
+            align-items: center;
+        }
+
+        .search input {
+            padding: 8px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 350px;
+        }
+
+        .search button {
+            padding: 8px 15px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 100px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(238, 231, 231);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        /* Style for header options */
+        .header-options {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .header-options li {
+            margin-right: 20px;
+            /* Adjust the spacing between each header option */
+        }
+
+        .header-options img {
+            height: 1.5em;
+            /* Adjust the height to match the text size */
+            margin-left: 5px;
+            /* Add some spacing between the text and the logo */
+            vertical-align: middle;
+            /* Align the logo vertically with the text */
+        }
+
+
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content img {
+            margin-top: 100px;
+            max-width: 150px;
+            border-radius: 50%;
+        }
+
+        .content h1 {
+            margin-top: 10px;
+            color: orange;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+            margin: 20px;
+            text-align: center;
+            background-color: #333;
+            /* Item background color */
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+            /* Item lift on hover */
+        }
+
+        .item img {
+            max-width: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .item img:hover {
+            transform: scale(1.1);
+            /* Image zoom on hover */
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: orange;
+            /* Item name color */
+        }
+
+        .item-price {
+            margin: 5px 0;
+        }
+
+        .add-to-cart {
+            background-color: orange;
+            /* Add to cart button background color */
+            color: #fff;
+            /* Add to cart button text color */
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: red;
+            /* Hover color change */
+        }
+
+        .quantity {
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            width: 50px;
+            /* Adjust width as needed */
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul {
+            position: absolute;
+            top: 18%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+        }
+
+        .navbar ul li {
+            list-style: none;
+        }
+
+        .navbar ul li a {
+            position: relative;
+            display: block;
+            text-transform: uppercase;
+            margin: 20px 0;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: orange;
+            font-family: sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            transition: 0.5s;
+            z-index: 1;
+        }
+
+        .navbar ul li a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-top: 2px solid orange;
+            border-bottom: 2px solid orange;
+            transform: scaley(2);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: orange;
+            transform: scale(0);
+            opacity: 0;
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff0000;
+        }
+
+        .navbar ul li a:hover::before {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        .dashboard-btn {
+            position: absolute;
+            top: 20px;
+            /* Adjust as needed */
+            left: 20px;
+            /* Adjust as needed */
+            background-color: orange;
+            margin-top: 80px;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-btn:hover {
+            background-color: red;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            /* Adding shadow on hover */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+        });
+
+        function addToCart() {
+            const itemName = this.parentNode.querySelector('.item-name').textContent;
+            const itemPrice = this.parentNode.querySelector('.item-price').textContent;
+            const quantity = this.parentNode.querySelector('.quantity').value;
+            console.log(`Added ${quantity} ${itemName} to cart for ${itemPrice} each.`);
+            // Add your cart logic here
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="iconlogo.png" alt="GUNI Food Hub Logo">
+        </div>
+        <div class="header-options">
+            <div class="search">
+                <input type="text" placeholder="Search...">
+                <button>Search</button>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="#Offers">Offers</a><img src="offers.jpg" alt="Offers Logo"></li>
+                    <li><a href="#Help">Help</a></li>
+                    <li><a href="#Cart">Cart</a><img src="cart.jpg" alt="Cart Logo"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="navbar">
+        <ul>
+            <li><a href="D:\Study\Sem VI\Capstone Project - II (CP-2)\Project test\shops menu\Fast Food\fastfood.html">FAST FOOD</a></li>
+            <li><a href="D:\Study\Sem VI\Capstone Project - II (CP-2)\Project test\shops menu\South Indian\southfood.html">SOUTH INDIAN FOOD</a></li>
+            <li><a href="D:\Study\Sem VI\Capstone Project - II (CP-2)\Project test\shops menu\Chinese\chinesefood.html">CHINESE FOOD</a></li>
+            <li><a href="D:\Study\Sem VI\Capstone Project - II (CP-2)\Project test\shops menu\Bakery\Bakery.html">BAKERY & CAKE</a></li>
+        </ul>
+    </div>
+
+    <button class="dashboard-btn">
+        <h3>Dashboard</h3>
+    </button> <!-- New button -->
+
+    <div class="content">
+        <img src="Chinese_Food.png" alt="Shop Logo">
+        <h1>Chinese Food Shop</h1>
+    </div>
+
+    <main>
+        <h2 style="text-align: center;">Menu</h2>
+        <div class="menu">
+            <div class="item">
+                <img src="manchurian.jpg" alt="Item 1">
+                <p class="item-name">Veg. Manchurian</p>
+                <p class="item-price">100 INR</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <input class="quantity" type="number" min="1" value="1">
+            </div>
+            <div class="item">
+                <img src="veg noodles.jpg" alt="Item 2">
+                <p class="item-name">Veg. Noodles</p>
+                <p class="item-price">80 INR</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <input class="quantity" type="number" min="1" value="1">
+            </div>
+            <div class="item">
+                <img src="Fried-Rice.jpg" alt="Item 3">
+                <p class="item-name">Fried Rice</p>
+                <p class="item-price">80 INR</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <input class="quantity" type="number" min="1" value="1">
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
